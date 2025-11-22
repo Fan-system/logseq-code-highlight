@@ -6,11 +6,11 @@ English | [简体中文](README_CN.md)
 
 ## ✨ Features
 
-- **🎨 Beautiful Color Themes**: Vibrant, carefully selected colors for better code readability
-- **🌓 Auto Theme Adaptation**: Automatically follows Logseq's dark/light theme setting
+- **🎨 Customizable Colors**: Fully customizable syntax highlighting colors for each code element
+- **🌓 Auto Theme Adaptation**: Separate color settings for dark and light themes
 - **💻 Multiple Languages**: Enhanced highlighting for all languages supported by Logseq's CodeMirror
 - **🚀 Lightweight**: Pure CSS-based approach with minimal performance impact
-- **⚡ Zero Configuration**: Works immediately after installation
+- **⚙️ Easy Configuration**: Configure colors through Logseq's plugin settings panel
 
 ## 🎯 What It Does
 
@@ -71,6 +71,52 @@ def calculate(x, y):
 \`\`\`
 
 The plugin will automatically apply enhanced syntax highlighting to all code blocks!
+
+## ⚙️ Configuration
+
+You can customize the syntax highlighting colors for both dark and light themes through Logseq's plugin settings:
+
+1. Go to `Settings` → `Plugins` → `Code Highlight` → `Settings`
+2. **Reset Colors**: Toggle the checkbox at the top to reset all colors to their default values
+3. Customize colors for each syntax element:
+   - **Keywords**: Color for keywords like `if`, `while`, `function`, `class`, etc.
+   - **Strings**: Color for string literals
+   - **Functions**: Color for function and method names
+   - **Numbers**: Color for numeric literals and constants
+   - **Comments**: Color for code comments
+   - **Variables**: Color for variables and parameters
+   - **Types**: Color for types, built-ins, and properties
+   - **Operators**: Color for operators and punctuation
+   - **Directives/Meta**: Color for preprocessor directives like `#include`, `import`, `@decorator`, etc.
+4. Colors can be set separately for dark and light themes
+5. Each color setting includes a color picker for easy selection
+6. Use standard color formats: hex colors (e.g., `#00bfff`), color names (e.g., `blue`), or RGB values
+
+Changes are applied immediately without restarting Logseq!
+
+### Default Color Schemes
+
+**Dark Theme:**
+- Keywords: `#00bfff` (bright blue)
+- Strings: `#ffcc88` (orange)
+- Functions: `#ffe66d` (yellow)
+- Numbers: `#b5ff8a` (bright green)
+- Comments: `#6adb7a` (green)
+- Variables: `#ff9999` (pink)
+- Types: `#4ec9b0` (cyan)
+- Operators: `#ffffff` (white)
+- Directives/Meta: `#ffe66d` (yellow)
+
+**Light Theme:**
+- Keywords: `#0000ff` (classic blue)
+- Strings: `#a31515` (red)
+- Functions: `#795e26` (brown)
+- Numbers: `#098658` (dark green)
+- Comments: `#008000` (green)
+- Variables: `#001080` (dark blue)
+- Types: `#267f99` (teal)
+- Operators: `#000000` (black)
+- Directives/Meta: `#af00db` (purple)
 
 ## 🔧 Supported Languages
 
