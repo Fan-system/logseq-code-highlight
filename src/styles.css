@@ -1,0 +1,810 @@
+/* Code Block Wrapper */
+.code-block-wrapper {
+  position: relative;
+  margin: 8px 0;
+}
+
+/* Base Code Block Styles */
+pre[class*="language-"] {
+  margin: 0;
+  padding: 16px;
+  border-radius: 8px;
+  overflow: auto;
+  font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', Consolas, Monaco, monospace;
+  font-size: var(--code-font-size, 14px);
+  line-height: 1.5;
+  tab-size: 2;
+}
+
+code[class*="language-"] {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Line Numbers */
+pre.line-numbers {
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+  position: relative;
+}
+
+.line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 16px;
+  left: 0;
+  width: 3em;
+  letter-spacing: -1px;
+  border-right: 1px solid rgba(128, 128, 128, 0.3);
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: rgba(128, 128, 128, 0.6);
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
+
+/* Copy Button */
+.code-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(128, 128, 128, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-block-wrapper:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background: rgba(128, 128, 128, 0.4);
+  color: white;
+}
+
+.code-copy-btn.copied {
+  background: rgba(40, 167, 69, 0.6);
+  color: white;
+}
+
+/* Fold Button */
+.code-fold-btn {
+  position: absolute;
+  top: 8px;
+  right: 40px;
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(128, 128, 128, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-block-wrapper:hover .code-fold-btn {
+  opacity: 1;
+}
+
+.code-fold-btn:hover {
+  background: rgba(128, 128, 128, 0.4);
+  color: white;
+}
+
+/* Collapsed State */
+pre.collapsed {
+  max-height: 60px;
+  overflow: hidden;
+}
+
+pre.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(transparent, var(--code-bg, #1e1e1e));
+  pointer-events: none;
+}
+
+/* Language Label */
+.code-language-label {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(128, 128, 128, 0.7);
+  letter-spacing: 0.5px;
+  z-index: 10;
+}
+
+/* ============================================
+   THEMES
+   ============================================ */
+
+/* VS Code Dark Theme - Ultra Enhanced */
+.code-theme-vscode-dark pre[class*="language-"],
+body.code-theme-vscode-dark pre[class*="language-"] {
+  background: #1e1e1e !important;
+  --code-bg: #1e1e1e;
+}
+
+.code-theme-vscode-dark code[class*="language-"],
+body.code-theme-vscode-dark code[class*="language-"] {
+  color: #ffffff !important;
+}
+
+.code-theme-vscode-dark .token.comment,
+.code-theme-vscode-dark .token.prolog,
+.code-theme-vscode-dark .token.doctype,
+.code-theme-vscode-dark .token.cdata {
+  color: #6adb7a !important;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.code-theme-vscode-dark .token.punctuation {
+  color: #ffffff !important;
+}
+
+.code-theme-vscode-dark .token.property,
+.code-theme-vscode-dark .token.tag,
+.code-theme-vscode-dark .token.boolean,
+.code-theme-vscode-dark .token.number,
+.code-theme-vscode-dark .token.constant,
+.code-theme-vscode-dark .token.symbol,
+.code-theme-vscode-dark .token.deleted {
+  color: #b5ff8a !important;
+  font-weight: 600;
+}
+
+.code-theme-vscode-dark .token.selector,
+.code-theme-vscode-dark .token.attr-name,
+.code-theme-vscode-dark .token.string,
+.code-theme-vscode-dark .token.char,
+.code-theme-vscode-dark .token.builtin,
+.code-theme-vscode-dark .token.inserted {
+  color: #ffcc88 !important;
+  font-weight: 500;
+}
+
+.code-theme-vscode-dark .token.operator,
+.code-theme-vscode-dark .token.entity,
+.code-theme-vscode-dark .token.url,
+.code-theme-vscode-dark .language-css .token.string,
+.code-theme-vscode-dark .style .token.string {
+  color: #ffffff !important;
+}
+
+.code-theme-vscode-dark .token.atrule,
+.code-theme-vscode-dark .token.attr-value,
+.code-theme-vscode-dark .token.keyword {
+  color: #5ec8ff !important;
+  font-weight: 700;
+}
+
+.code-theme-vscode-dark .token.function,
+.code-theme-vscode-dark .token.class-name,
+.code-theme-vscode-dark .token.method,
+.code-theme-vscode-dark .token.function-variable,
+.code-theme-vscode-dark .token.method-variable {
+  color: #ffe66d !important;
+  font-weight: 600;
+}
+
+.code-theme-vscode-dark .token.regex,
+.code-theme-vscode-dark .token.important,
+.code-theme-vscode-dark .token.variable,
+.code-theme-vscode-dark .token.parameter {
+  color: #ff9999 !important;
+  font-weight: 600;
+}
+
+.code-theme-vscode-dark .token.namespace {
+  color: #4ec9b0 !important;
+  font-weight: 500;
+}
+
+/* Monokai Theme - Ultra Enhanced */
+.code-theme-monokai pre[class*="language-"] {
+  background: #272822;
+  --code-bg: #272822;
+}
+
+.code-theme-monokai code[class*="language-"] {
+  color: #ffffff;
+}
+
+.code-theme-monokai .token.comment,
+.code-theme-monokai .token.prolog,
+.code-theme-monokai .token.doctype,
+.code-theme-monokai .token.cdata {
+  color: #88c0d0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.code-theme-monokai .token.punctuation {
+  color: #ffffff;
+}
+
+.code-theme-monokai .token.property,
+.code-theme-monokai .token.tag,
+.code-theme-monokai .token.constant,
+.code-theme-monokai .token.symbol,
+.code-theme-monokai .token.deleted {
+  color: #ff6ac1;
+  font-weight: 700;
+}
+
+.code-theme-monokai .token.boolean,
+.code-theme-monokai .token.number {
+  color: #d0a0ff;
+  font-weight: 600;
+}
+
+.code-theme-monokai .token.selector,
+.code-theme-monokai .token.attr-name,
+.code-theme-monokai .token.string,
+.code-theme-monokai .token.char,
+.code-theme-monokai .token.builtin,
+.code-theme-monokai .token.inserted {
+  color: #c3ff5f;
+  font-weight: 600;
+}
+
+.code-theme-monokai .token.operator,
+.code-theme-monokai .token.entity,
+.code-theme-monokai .token.url,
+.code-theme-monokai .language-css .token.string,
+.code-theme-monokai .style .token.string {
+  color: #ffffff;
+}
+
+.code-theme-monokai .token.atrule,
+.code-theme-monokai .token.attr-value,
+.code-theme-monokai .token.function,
+.code-theme-monokai .token.class-name,
+.code-theme-monokai .token.method,
+.code-theme-monokai .token.function-variable {
+  color: #ffe66d;
+  font-weight: 600;
+}
+
+.code-theme-monokai .token.keyword {
+  color: #66ddff;
+  font-weight: 700;
+}
+
+.code-theme-monokai .token.regex,
+.code-theme-monokai .token.important {
+  color: #ffbb44;
+  font-weight: 600;
+}
+
+.code-theme-monokai .token.variable,
+.code-theme-monokai .token.parameter {
+  color: #fd971f;
+  font-weight: 600;
+}
+
+.code-theme-monokai .token.namespace {
+  color: #f92672;
+  font-weight: 500;
+}
+
+/* GitHub Light Theme */
+.code-theme-github-light pre[class*="language-"] {
+  background: #f6f8fa;
+  --code-bg: #f6f8fa;
+}
+
+.code-theme-github-light code[class*="language-"] {
+  color: #24292f;
+}
+
+.code-theme-github-light .token.comment,
+.code-theme-github-light .token.prolog,
+.code-theme-github-light .token.doctype,
+.code-theme-github-light .token.cdata {
+  color: #6e7781;
+}
+
+.code-theme-github-light .token.punctuation {
+  color: #24292f;
+}
+
+.code-theme-github-light .token.property,
+.code-theme-github-light .token.tag,
+.code-theme-github-light .token.boolean,
+.code-theme-github-light .token.number,
+.code-theme-github-light .token.constant,
+.code-theme-github-light .token.symbol,
+.code-theme-github-light .token.deleted {
+  color: #0550ae;
+}
+
+.code-theme-github-light .token.selector,
+.code-theme-github-light .token.attr-name,
+.code-theme-github-light .token.string,
+.code-theme-github-light .token.char,
+.code-theme-github-light .token.builtin,
+.code-theme-github-light .token.inserted {
+  color: #0a3069;
+}
+
+.code-theme-github-light .token.operator,
+.code-theme-github-light .token.entity,
+.code-theme-github-light .token.url,
+.code-theme-github-light .language-css .token.string,
+.code-theme-github-light .style .token.string {
+  color: #24292f;
+}
+
+.code-theme-github-light .token.atrule,
+.code-theme-github-light .token.attr-value,
+.code-theme-github-light .token.keyword {
+  color: #cf222e;
+}
+
+.code-theme-github-light .token.function,
+.code-theme-github-light .token.class-name {
+  color: #8250df;
+}
+
+.code-theme-github-light .token.regex,
+.code-theme-github-light .token.important,
+.code-theme-github-light .token.variable {
+  color: #953800;
+}
+
+.code-theme-github-light .code-copy-btn,
+.code-theme-github-light .code-fold-btn {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.code-theme-github-light .code-copy-btn:hover,
+.code-theme-github-light .code-fold-btn:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* GitHub Dark Theme */
+.code-theme-github-dark pre[class*="language-"] {
+  background: #0d1117;
+  --code-bg: #0d1117;
+}
+
+.code-theme-github-dark code[class*="language-"] {
+  color: #c9d1d9;
+}
+
+.code-theme-github-dark .token.comment,
+.code-theme-github-dark .token.prolog,
+.code-theme-github-dark .token.doctype,
+.code-theme-github-dark .token.cdata {
+  color: #8b949e;
+}
+
+.code-theme-github-dark .token.punctuation {
+  color: #c9d1d9;
+}
+
+.code-theme-github-dark .token.property,
+.code-theme-github-dark .token.tag,
+.code-theme-github-dark .token.boolean,
+.code-theme-github-dark .token.number,
+.code-theme-github-dark .token.constant,
+.code-theme-github-dark .token.symbol,
+.code-theme-github-dark .token.deleted {
+  color: #79c0ff;
+}
+
+.code-theme-github-dark .token.selector,
+.code-theme-github-dark .token.attr-name,
+.code-theme-github-dark .token.string,
+.code-theme-github-dark .token.char,
+.code-theme-github-dark .token.builtin,
+.code-theme-github-dark .token.inserted {
+  color: #a5d6ff;
+}
+
+.code-theme-github-dark .token.operator,
+.code-theme-github-dark .token.entity,
+.code-theme-github-dark .token.url,
+.code-theme-github-dark .language-css .token.string,
+.code-theme-github-dark .style .token.string {
+  color: #c9d1d9;
+}
+
+.code-theme-github-dark .token.atrule,
+.code-theme-github-dark .token.attr-value,
+.code-theme-github-dark .token.keyword {
+  color: #ff7b72;
+}
+
+.code-theme-github-dark .token.function,
+.code-theme-github-dark .token.class-name {
+  color: #d2a8ff;
+}
+
+.code-theme-github-dark .token.regex,
+.code-theme-github-dark .token.important,
+.code-theme-github-dark .token.variable {
+  color: #ffa657;
+}
+
+/* Dracula Theme */
+.code-theme-dracula pre[class*="language-"] {
+  background: #282a36;
+  --code-bg: #282a36;
+}
+
+.code-theme-dracula code[class*="language-"] {
+  color: #f8f8f2;
+}
+
+.code-theme-dracula .token.comment,
+.code-theme-dracula .token.prolog,
+.code-theme-dracula .token.doctype,
+.code-theme-dracula .token.cdata {
+  color: #6272a4;
+}
+
+.code-theme-dracula .token.punctuation {
+  color: #f8f8f2;
+}
+
+.code-theme-dracula .token.property,
+.code-theme-dracula .token.tag,
+.code-theme-dracula .token.constant,
+.code-theme-dracula .token.symbol,
+.code-theme-dracula .token.deleted {
+  color: #ff79c6;
+}
+
+.code-theme-dracula .token.boolean,
+.code-theme-dracula .token.number {
+  color: #bd93f9;
+}
+
+.code-theme-dracula .token.selector,
+.code-theme-dracula .token.attr-name,
+.code-theme-dracula .token.string,
+.code-theme-dracula .token.char,
+.code-theme-dracula .token.builtin,
+.code-theme-dracula .token.inserted {
+  color: #f1fa8c;
+}
+
+.code-theme-dracula .token.operator,
+.code-theme-dracula .token.entity,
+.code-theme-dracula .token.url,
+.code-theme-dracula .language-css .token.string,
+.code-theme-dracula .style .token.string,
+.code-theme-dracula .token.variable {
+  color: #f8f8f2;
+}
+
+.code-theme-dracula .token.atrule,
+.code-theme-dracula .token.attr-value,
+.code-theme-dracula .token.keyword {
+  color: #8be9fd;
+}
+
+.code-theme-dracula .token.function,
+.code-theme-dracula .token.class-name {
+  color: #50fa7b;
+}
+
+.code-theme-dracula .token.regex,
+.code-theme-dracula .token.important {
+  color: #ffb86c;
+}
+
+/* Nord Theme */
+.code-theme-nord pre[class*="language-"] {
+  background: #2e3440;
+  --code-bg: #2e3440;
+}
+
+.code-theme-nord code[class*="language-"] {
+  color: #d8dee9;
+}
+
+.code-theme-nord .token.comment,
+.code-theme-nord .token.prolog,
+.code-theme-nord .token.doctype,
+.code-theme-nord .token.cdata {
+  color: #616e88;
+}
+
+.code-theme-nord .token.punctuation {
+  color: #81a1c1;
+}
+
+.code-theme-nord .token.property,
+.code-theme-nord .token.tag,
+.code-theme-nord .token.constant,
+.code-theme-nord .token.symbol,
+.code-theme-nord .token.deleted {
+  color: #81a1c1;
+}
+
+.code-theme-nord .token.boolean,
+.code-theme-nord .token.number {
+  color: #b48ead;
+}
+
+.code-theme-nord .token.selector,
+.code-theme-nord .token.attr-name,
+.code-theme-nord .token.string,
+.code-theme-nord .token.char,
+.code-theme-nord .token.builtin,
+.code-theme-nord .token.inserted {
+  color: #a3be8c;
+}
+
+.code-theme-nord .token.operator,
+.code-theme-nord .token.entity,
+.code-theme-nord .token.url,
+.code-theme-nord .language-css .token.string,
+.code-theme-nord .style .token.string,
+.code-theme-nord .token.variable {
+  color: #d8dee9;
+}
+
+.code-theme-nord .token.atrule,
+.code-theme-nord .token.attr-value,
+.code-theme-nord .token.keyword {
+  color: #81a1c1;
+}
+
+.code-theme-nord .token.function,
+.code-theme-nord .token.class-name {
+  color: #88c0d0;
+}
+
+.code-theme-nord .token.regex,
+.code-theme-nord .token.important {
+  color: #ebcb8b;
+}
+
+/* One Dark Theme - Ultra Enhanced */
+.code-theme-one-dark pre[class*="language-"] {
+  background: #282c34;
+  --code-bg: #282c34;
+}
+
+.code-theme-one-dark code[class*="language-"] {
+  color: #f0f0f0;
+}
+
+.code-theme-one-dark .token.comment,
+.code-theme-one-dark .token.prolog,
+.code-theme-one-dark .token.doctype,
+.code-theme-one-dark .token.cdata {
+  color: #98a0ad;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.code-theme-one-dark .token.punctuation {
+  color: #f0f0f0;
+}
+
+.code-theme-one-dark .token.property,
+.code-theme-one-dark .token.tag,
+.code-theme-one-dark .token.constant,
+.code-theme-one-dark .token.symbol,
+.code-theme-one-dark .token.deleted {
+  color: #ff8fa3;
+  font-weight: 700;
+}
+
+.code-theme-one-dark .token.boolean,
+.code-theme-one-dark .token.number {
+  color: #ffbe7a;
+  font-weight: 600;
+}
+
+.code-theme-one-dark .token.selector,
+.code-theme-one-dark .token.attr-name,
+.code-theme-one-dark .token.string,
+.code-theme-one-dark .token.char,
+.code-theme-one-dark .token.builtin,
+.code-theme-one-dark .token.inserted {
+  color: #b4f5a0;
+  font-weight: 600;
+}
+
+.code-theme-one-dark .token.operator,
+.code-theme-one-dark .token.entity,
+.code-theme-one-dark .token.url,
+.code-theme-one-dark .language-css .token.string,
+.code-theme-one-dark .style .token.string {
+  color: #56d6e8;
+  font-weight: 500;
+}
+
+.code-theme-one-dark .token.atrule,
+.code-theme-one-dark .token.attr-value,
+.code-theme-one-dark .token.keyword {
+  color: #e398ff;
+  font-weight: 700;
+}
+
+.code-theme-one-dark .token.function,
+.code-theme-one-dark .token.class-name,
+.code-theme-one-dark .token.method,
+.code-theme-one-dark .token.function-variable {
+  color: #7dd3ff;
+  font-weight: 600;
+}
+
+.code-theme-one-dark .token.regex,
+.code-theme-one-dark .token.important {
+  color: #ffe88c;
+  font-weight: 600;
+}
+
+.code-theme-one-dark .token.variable,
+.code-theme-one-dark .token.parameter {
+  color: #ff8a73;
+  font-weight: 600;
+}
+
+.code-theme-one-dark .token.namespace {
+  color: #56d6e8;
+  font-weight: 500;
+}
+
+/* Solarized Light Theme */
+.code-theme-solarized-light pre[class*="language-"] {
+  background: #fdf6e3;
+  --code-bg: #fdf6e3;
+}
+
+.code-theme-solarized-light code[class*="language-"] {
+  color: #657b83;
+}
+
+.code-theme-solarized-light .token.comment,
+.code-theme-solarized-light .token.prolog,
+.code-theme-solarized-light .token.doctype,
+.code-theme-solarized-light .token.cdata {
+  color: #93a1a1;
+}
+
+.code-theme-solarized-light .token.punctuation {
+  color: #657b83;
+}
+
+.code-theme-solarized-light .token.property,
+.code-theme-solarized-light .token.tag,
+.code-theme-solarized-light .token.boolean,
+.code-theme-solarized-light .token.number,
+.code-theme-solarized-light .token.constant,
+.code-theme-solarized-light .token.symbol,
+.code-theme-solarized-light .token.deleted {
+  color: #268bd2;
+}
+
+.code-theme-solarized-light .token.selector,
+.code-theme-solarized-light .token.attr-name,
+.code-theme-solarized-light .token.string,
+.code-theme-solarized-light .token.char,
+.code-theme-solarized-light .token.builtin,
+.code-theme-solarized-light .token.inserted {
+  color: #2aa198;
+}
+
+.code-theme-solarized-light .token.operator,
+.code-theme-solarized-light .token.entity,
+.code-theme-solarized-light .token.url,
+.code-theme-solarized-light .language-css .token.string,
+.code-theme-solarized-light .style .token.string {
+  color: #657b83;
+}
+
+.code-theme-solarized-light .token.atrule,
+.code-theme-solarized-light .token.attr-value,
+.code-theme-solarized-light .token.keyword {
+  color: #859900;
+}
+
+.code-theme-solarized-light .token.function,
+.code-theme-solarized-light .token.class-name {
+  color: #b58900;
+}
+
+.code-theme-solarized-light .token.regex,
+.code-theme-solarized-light .token.important,
+.code-theme-solarized-light .token.variable {
+  color: #cb4b16;
+}
+
+.code-theme-solarized-light .code-copy-btn,
+.code-theme-solarized-light .code-fold-btn {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.code-theme-solarized-light .code-copy-btn:hover,
+.code-theme-solarized-light .code-fold-btn:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Diff highlight styles */
+.token.deleted {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.token.inserted {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+/* Important and bold tokens */
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Selection */
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  background: rgba(128, 128, 128, 0.3);
+}
+
+/* Scrollbar styling */
+pre[class*="language-"]::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+pre[class*="language-"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+pre[class*="language-"]::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 4px;
+}
+
+pre[class*="language-"]::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.5);
+}
